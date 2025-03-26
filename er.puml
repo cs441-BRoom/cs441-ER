@@ -72,13 +72,6 @@ entity "Assignment_Submission" as ASSIGNMENT_SUBMISSION <<entity>> {
   score
 }
 
-entity "File" as FILE <<entity>> {
-  "file_id" as FileID <<key>>
-  "submission_id" as SubmissionIDFK <<foreign key to Assignment_Submission>>
-  file_name
-  file_url
-  uploaded_at
-}
 
 relationship "has" as HAS_PROFILE <<relationship>> {
 }
@@ -115,10 +108,6 @@ relationship "contains" as CONTAINS_SUBMISSION <<relationship>> {
 ASSIGNMENT -1- CONTAINS_SUBMISSION
 CONTAINS_SUBMISSION =N= ASSIGNMENT_SUBMISSION
 
-relationship "has" as HAS_FILE <<relationship>> {
-}
-ASSIGNMENT_SUBMISSION -1- HAS_FILE
-HAS_FILE =N= FILE
 
 relationship "creates" as CREATES <<relationship>> {
 }
