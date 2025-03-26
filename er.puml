@@ -50,6 +50,21 @@ entity "News" as NEWS <<entity>> {
   "created_by" as CreatedByFK <<foreign key to User>>
 }
 
+entity "Comment" as COMMENT <<entity>> {
+  "comment_id" as CommentID <<key>>
+  "news_id" as NewsIDFK <<foreign key to News>>
+  "user_id" as UserIDFK <<foreign key to User>>
+  content
+  created_at
+}
+
+entity "Like" as LIKE <<entity>> {
+  "like_id" as LikeID <<key>>
+  "news_id" as NewsIDFK <<foreign key to News>>
+  "user_id" as UserIDFK <<foreign key to User>>
+  liked_at
+}
+
 entity "Assignment" as ASSIGNMENT <<entity>> {
   "assignment_id" as AssignmentID <<key>>
   "workspace_id" as WorkspaceIDFK <<foreign key to Workspace>>
@@ -66,7 +81,6 @@ entity "Assignment_Submission" as ASSIGNMENT_SUBMISSION <<entity>> {
   submission_date
   score
 }
-
 
 relationship "is_member_of" as IS_MEMBER <<relationship>> {
 }
@@ -98,7 +112,6 @@ relationship "contains" as CONTAINS_SUBMISSION <<relationship>> {
 ASSIGNMENT -1- CONTAINS_SUBMISSION
 CONTAINS_SUBMISSION =N= ASSIGNMENT_SUBMISSION
 
-
 relationship "creates" as CREATES <<relationship>> {
 }
 USER -1- CREATES
@@ -113,5 +126,25 @@ relationship "creates" as CREATES_ASSIGNMENT <<relationship>> {
 }
 USER -1- CREATES_ASSIGNMENT
 CREATES_ASSIGNMENT =N= ASSIGNMENT
+
+relationship "comments_on" as COMMENTS_ON <<relationship>> {
+}
+USER -1- COMMENTS_ON
+COMMENTS_ON =N= COMMENT
+
+relationship "has_comments" as HAS_COMMENTS <<relationship>> {
+}
+NEWS -1- HAS_COMMENTS
+HAS_COMMENTS =N= COMMENT
+
+relationship "likes" as LIKES <<relationship>> {
+}
+USER -1- LIKES
+LIKES =N= LIKE
+
+relationship "has_likes" as HAS_LIKES <<relationship>> {
+}
+NEWS -1- HAS_LIKES
+HAS_LIKES =N= LIKE
 
 @endchen
