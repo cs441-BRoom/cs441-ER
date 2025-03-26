@@ -19,15 +19,10 @@ entity "User" as USER <<entity>> {
   "user_id" as UserID <<key>>
   username
   password
+  firstname
+  lastname
   email
   auth_type
-}
-
-entity "Profile" as PROFILE <<entity>> {
-  "profile_id" as ProfileID <<key>>
-  "user_id" as UserIDFK <<foreign key to User>>
-  profile_picture_url
-  personal_info
 }
 
 entity "Workspace" as WORKSPACE <<entity>> {
@@ -72,11 +67,6 @@ entity "Assignment_Submission" as ASSIGNMENT_SUBMISSION <<entity>> {
   score
 }
 
-
-relationship "has" as HAS_PROFILE <<relationship>> {
-}
-USER =1= HAS_PROFILE
-HAS_PROFILE =1= PROFILE
 
 relationship "is_member_of" as IS_MEMBER <<relationship>> {
 }
