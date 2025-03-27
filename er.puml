@@ -53,7 +53,7 @@ entity "News" as NEWS <<entity>> {
 entity "Comment" as COMMENT <<entity>> {
   "comment_id" as CommentID <<key>>
   "news_id" as NewsIDFK <<foreign key to News>>
-  "user_id" as UserIDFK <<foreign key to User>>
+  "created_by" as UserIDFK <<foreign key to User>>
   content
   created_at
 }
